@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.kelab.evaluation.dao.StatisticMapper" >
+  <resultMap id="BaseResultMap" type="org.kelab.evaluation.entity.Statistic" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="institute_id" property="instituteId" jdbcType="INTEGER" />
+    <result column="grade" property="grade" jdbcType="INTEGER" />
+    <result column="average" property="average" jdbcType="DOUBLE" />
+    <result column="A_num" property="aNum" jdbcType="INTEGER" />
+    <result column="B_num" property="bNum" jdbcType="INTEGER" />
+    <result column="C_num" property="cNum" jdbcType="INTEGER" />
+    <result column="D_num" property="dNum" jdbcType="INTEGER" />
+    <result column="evaluate_date" property="evaluateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, institute_id, grade, average, A_num, B_num, C_num, D_num, evaluate_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from statistic
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from statistic
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.kelab.evaluation.entity.Statistic" >
+    insert into statistic (id, institute_id, grade, 
+      average, A_num, B_num, 
+      C_num, D_num, evaluate_date
+      )
+    values (#{id,jdbcType=INTEGER}, #{instituteId,jdbcType=INTEGER}, #{grade,jdbcType=INTEGER}, 
+      #{average,jdbcType=DOUBLE}, #{aNum,jdbcType=INTEGER}, #{bNum,jdbcType=INTEGER}, 
+      #{cNum,jdbcType=INTEGER}, #{dNum,jdbcType=INTEGER}, #{evaluateDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.kelab.evaluation.entity.Statistic" >
+    insert into statistic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="instituteId != null" >
+        institute_id,
+      </if>
+      <if test="grade != null" >
+        grade,
+      </if>
+      <if test="average != null" >
+        average,
+      </if>
+      <if test="aNum != null" >
+        A_num,
+      </if>
+      <if test="bNum != null" >
+        B_num,
+      </if>
+      <if test="cNum != null" >
+        C_num,
+      </if>
+      <if test="dNum != null" >
+        D_num,
+      </if>
+      <if test="evaluateDate != null" >
+        evaluate_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="instituteId != null" >
+        #{instituteId,jdbcType=INTEGER},
+      </if>
+      <if test="grade != null" >
+        #{grade,jdbcType=INTEGER},
+      </if>
+      <if test="average != null" >
+        #{average,jdbcType=DOUBLE},
+      </if>
+      <if test="aNum != null" >
+        #{aNum,jdbcType=INTEGER},
+      </if>
+      <if test="bNum != null" >
+        #{bNum,jdbcType=INTEGER},
+      </if>
+      <if test="cNum != null" >
+        #{cNum,jdbcType=INTEGER},
+      </if>
+      <if test="dNum != null" >
+        #{dNum,jdbcType=INTEGER},
+      </if>
+      <if test="evaluateDate != null" >
+        #{evaluateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.kelab.evaluation.entity.Statistic" >
+    update statistic
+    <set >
+      <if test="instituteId != null" >
+        institute_id = #{instituteId,jdbcType=INTEGER},
+      </if>
+      <if test="grade != null" >
+        grade = #{grade,jdbcType=INTEGER},
+      </if>
+      <if test="average != null" >
+        average = #{average,jdbcType=DOUBLE},
+      </if>
+      <if test="aNum != null" >
+        A_num = #{aNum,jdbcType=INTEGER},
+      </if>
+      <if test="bNum != null" >
+        B_num = #{bNum,jdbcType=INTEGER},
+      </if>
+      <if test="cNum != null" >
+        C_num = #{cNum,jdbcType=INTEGER},
+      </if>
+      <if test="dNum != null" >
+        D_num = #{dNum,jdbcType=INTEGER},
+      </if>
+      <if test="evaluateDate != null" >
+        evaluate_date = #{evaluateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.kelab.evaluation.entity.Statistic" >
+    update statistic
+    set institute_id = #{instituteId,jdbcType=INTEGER},
+      grade = #{grade,jdbcType=INTEGER},
+      average = #{average,jdbcType=DOUBLE},
+      A_num = #{aNum,jdbcType=INTEGER},
+      B_num = #{bNum,jdbcType=INTEGER},
+      C_num = #{cNum,jdbcType=INTEGER},
+      D_num = #{dNum,jdbcType=INTEGER},
+      evaluate_date = #{evaluateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

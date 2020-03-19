@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	 http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <context:annotation-config/>
+
+    <context:component-scan base-package="org.kelab.enterprise"/>
+
+    <bean
+            class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:config.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--java对象对json的格式转换器-->
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <!-- <constructor-arg ref="utf8Charset"/> -->
+                <!-- <property name="supportedMediaTypes" value = "text/plain;charset=UTF-8" /> -->
+                <property name="writeAcceptCharset" value="false"/><!-- 用于避免响应头过大 -->
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/plain;charset=UTF-8</value>
+                        <value>text/html;charset=UTF-8</value>
+                        <!--                         <value>text/json;charset=UTF-8</value>    -->
+                    </list>
+                </property>
+            </bean>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/json;charset=UTF-8</value>
+                    </list>
+                </property>
+
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <import resource="classpath:aop/spring-aop.xml"/>
+    <import resource="classpath:mybatis/database.xml"/>
+
+
+    <!--monggodb操作依赖-->
+    <bean class="org.cn.wzy.dao.impl.BaseMongoDao"/>
+
+    <!--自动生成代码依赖-->
+    <bean class="org.cn.wzy.util.DaoAndEntityGenerator"/>
+    <bean class="org.cn.wzy.util.MapperingGenerator"/>
+</beans>
