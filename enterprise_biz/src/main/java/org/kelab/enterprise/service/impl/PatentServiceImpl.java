@@ -184,7 +184,7 @@ public class PatentServiceImpl extends BaseServiceImpl<Patent> implements Patent
 		}
 		Pattern pattern = Pattern.compile("^.*"+filter(keyword)+".*$",Pattern.CASE_INSENSITIVE);
 		BasicDBObject cond=new BasicDBObject();
-		cond.put("keywords",pattern);
+		cond.put("patent_name",pattern);
 		List<Patent>list=mongoDao.queryByCondition(query,new BasicDBObject(),cond);
 		return list;
 	}
@@ -193,7 +193,7 @@ public class PatentServiceImpl extends BaseServiceImpl<Patent> implements Patent
 	public Integer queryConditionCount(BaseQuery<Patent> query, String keyword) {
 		Pattern pattern = Pattern.compile("^.*"+filter(keyword)+".*$",Pattern.CASE_INSENSITIVE);
 		BasicDBObject cond=new BasicDBObject();
-		cond.put("keywords",pattern);
+		cond.put("patent_name",pattern);
 		Integer total=mongoDao.queryCoditionCount(query,cond);
 		return total;
 	}

@@ -12,12 +12,12 @@ public class LiteratureServiceTest extends BaseDaoTest {
 	private LiteratureService service;
 
 
-	@Test
-	public void test() {
-		System.out.println(service.queryTypeDistribution("东方日立(成都)电控设备有限公司"));
-
-
-	}
+//	@Test
+//	public void test() {
+//		System.out.println(service.queryTypeDistribution("东方日立(成都)电控设备有限公司"));
+//
+//
+//	}
 
 	@Test
 	public void countTest(){

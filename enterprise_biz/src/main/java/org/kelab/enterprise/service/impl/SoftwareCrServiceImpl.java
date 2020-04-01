@@ -25,7 +25,7 @@ public class SoftwareCrServiceImpl extends BaseServiceImpl<SoftwareCr> implement
 	@Override
 	public List<SoftwareCr> query(BaseQuery<SoftwareCr> query) {
 		checkPage(query);
-		return this.mongoDao.queryByCondition(query,new BasicDBObject("companyName",1));
+		return this.mongoDao.queryByCondition(query,new BasicDBObject("releaseDate",1));
 	}
 
 	@Override

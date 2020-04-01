@@ -37,7 +37,7 @@ public class NewsServiceImpl extends BaseServiceImpl<News> implements NewsServic
 	@Override
 	public List<News> query(BaseQuery<News> query) {
 		checkPage(query);
-		return this.mongoDao.queryByCondition(query,new BasicDBObject("crawl_time",-1));
+		return this.mongoDao.queryByCondition(query,new BasicDBObject("publish_time",-1));
 	}
 
 

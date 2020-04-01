@@ -15,7 +15,7 @@ import org.cn.wzy.annotation.MGKey;
 @NoArgsConstructor
 @Data
 @Accessors(chain = true)
-@MGColName("patent")
+@MGColName("patent_backup")
 public class Patent {
 	private String companyName;
 	//摘要

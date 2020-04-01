@@ -231,20 +231,9 @@ public class LiteratureServiceImpl extends BaseServiceImpl<Literature> implement
 		}
 		Pattern pattern = Pattern.compile("^.*"+keyword+".*$",Pattern.CASE_INSENSITIVE);
 		BasicDBObject cond=new BasicDBObject();
-		BasicDBList condList = new BasicDBList();
-		condList.add(new BasicDBObject("document_name",pattern));
-		condList.add(new BasicDBObject("keyword",pattern));
-		cond.put("$or",condList);
-		MongoDatabase mongo=MongoUtils.getMongo(mongoDao);
-		MongoCollection collection=mongo.getCollection("literature");
-		FindIterable<Document> findIterable = collection.find(cond).skip(query.getStart()).limit(query.getRows());
-		MongoCursor<Document> cursor = findIterable.iterator();
-		ArrayList result = new ArrayList();
-		while (cursor.hasNext()){
-			Document document = (Document)cursor.next();
-			result.add(MapUtil.castToEntity(document, Literature.class));
-		}
-		return result;
+		cond.put("document_name",pattern);
+		List<Literature>list=mongoDao.queryByCondition(query,new BasicDBObject(),cond);
+		return list;
 	}
 
 	@Override
